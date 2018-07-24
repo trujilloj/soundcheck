@@ -1,18 +1,18 @@
 <template>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg">
   <div class="container-fluid">
     <div class="navbar-header">
       <router-link to="/">
         <div class="title">
-          <img class="logo" src="blacklogo.png" alt="soundcheck">
-          <a href="" class="text">soundcheck</a>
+          <img class="logo" src="whitelogo.png" alt="soundcheck">
+          <h1>soundcheck</h1>
         </div>
       </router-link>
     </div>
     <div class="rightMenu">
-      <a href="">Borrow</a>
+      <router-link to="/Borrow">Borrow</router-link>
       <div>|</div>
-      <router-link to="/Requests">Lend</router-link>
+      <router-link to="/Lend">Lend</router-link>
       <div>|</div>
       <router-link to="/About">About</router-link>
     </div>
@@ -31,12 +31,13 @@ export default {};
 .rightMenu {
   display: flex;
   justify-content: space-around;
-  width: 45%;
+  width: 25%;
   align-items: center;
 }
 .logo {
   max-width: auto;
   max-height: 80px;
+  margin-right: 3%;
 }
 
 nav {

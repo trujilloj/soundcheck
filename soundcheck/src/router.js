@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
-import Requests from './views/Requests.vue'
-import Matches from './views/Matches.vue'
+import Lend from './views/Lend.vue'
+import Borrow from './views/Borrow.vue'
 
 Vue.use(Router)
 
@@ -19,14 +19,14 @@ export default new Router({
             component: About
         },
         {
-            path: '/requests',
-            name: 'requests',
-            component: Requests
+            path: '/lend',
+            name: 'lend',
+            component: Lend
         },
         {
-            path: '/matches',
-            name: 'matches',
-            component: Matches
+            path: '/borrow',
+            name: 'borrow',
+            component: Borrow
         }
     ]
 })
