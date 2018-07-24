@@ -1,6 +1,6 @@
 <template>
 <div :class=matchStyle.class>
-        <div class="card-body">
+        <div class="card-body cardStyle">
             <h4>What you requested:</h4>
             <p>{{match.borrowerRequest}}</p>
             <h4>On {{readableDate}} 
@@ -11,6 +11,7 @@
               <br />{{match.venueCity}}, {{match.venueState}} {{match.venueZip}}
             </p>
             <div :id=match.id></div>
+            <button class="btn btn-danger" @click.prevent="deleteRequest(match.id)">Delete this Request</button>
         </div>
     </div>
 </template>
@@ -27,7 +28,9 @@ export default {
       }
     };
   },
-  props: ["match"],
+  props: ["match", "deleteRequest", "deleteId", "API"],
+  methods: {
+  },
   mounted() {
     if (this.match.lender) {
         this.fulfilled = true;
@@ -61,5 +64,11 @@ export default {
 }
 .requestCard {
   max-width: 300px;
+}
+.cardStyle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 300px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div  class="card text-white bg-dark mb-3">
         <h4  class="card-header">{{borrower.borrowerName}}</h4>
-        <div class="card-body">
+        <div class="card-body cardStyle">
             <p>Requests:</p>
             <p>{{borrower.borrowerRequest}}</p>
             <h4>On {{readableDate}} 
@@ -85,5 +85,10 @@ fetch(google_url + address + sensor)
 }
 .requestCard {
     width: 300px;
+}
+.cardStyle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 </style>

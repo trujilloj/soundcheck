@@ -4,12 +4,14 @@
         <Login v-show="displayLogin" :switchSignup="switchSignup" :signup="signup" :submitLogin="submitLogin" :loginData="loginData" :displayLogin="displayLogin" :toggleDisplay="toggleDisplay"/>
         <div class="home" v-show="!displayLogin">
           <div class="box">
-            <button class="btn btn-success cardSpacing" @click.prevent="showMatches = !showMatches">View Upcoming Matches</button>
-          <section id="myMatches" class="cardSpacing" v-show="showMatches">
-            <Requests v-for="match in myRequests" :key="match.id" :match="match"/>
+            <h3>Upcoming Matches:</h3>
+            <button v-show="!showMatches" class="btn btn-success cardSpacing" @click.prevent="showMatches = !showMatches">Hide Upcoming Matches</button>
+            <button v-show="showMatches" class="btn btn-success cardSpacing" @click.prevent="showMatches = !showMatches">Show Upcoming Matches</button>
+          <section id="myMatches" class="cardSpacing" v-show="!showMatches">
+            <Requests v-for="match in myRequests" :key="match.id" :match="match" :deleteId="deleteId" :deleteRequest="deleteRequest"/>
           </section>
-          <button class="btn btn-success cardSpacing" @click.prevent="displayForm = true">Make a New Request</button>
-          <RequestForm v-show="displayForm" :borrowerInfo="borrowerInfo" />
+          <button v-show="!displayForm" class="btn btn-success cardSpacing" @click.prevent="displayForm = !displayForm, resetForm()">Make a New Request</button>
+          <RequestForm v-show="displayForm" :formSubmission="formSubmission" :borrowerInfo="borrowerInfo" :submitRequest="submitRequest"/>
           </div>
         </div>
         <Footer />
@@ -20,9 +22,7 @@
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import Login from "@/components/Login.vue";
-import Search from "@/components/Search.vue";
 import RequestCard from "@/components/RequestCard.vue";
-import LenderForm from "@/components/LenderForm.vue";
 import Requests from "@/components/Requests.vue";
 import RequestForm from "@/components/RequestForm.vue";
 
@@ -31,9 +31,7 @@ export default {
     Header,
     Footer,
     Login,
-    Search,
     RequestCard,
-    LenderForm,
     Requests,
     RequestForm
   },
@@ -55,17 +53,21 @@ export default {
       },
       requestId: "",
       borrowerInfo: {
-        lenderEmail: "",
-        lenderZip: "",
-        lenderCity: "",
-        lenderName: "",
-        lenderGear: "",
-        lenderPhone: "",
-        lenderState: "",
-        lenderStreet: "",
-        request: {
-          _id: null
-        }
+        bandName: "",
+        borrowerEmail: "",
+        borrowerZip: "",
+        borrowerCity: "",
+        borrowerName: "",
+        borrowerRequest: "",
+        borrowerPhone: "",
+        borrowerState: "",
+        borrowerStreet: "",
+        venueName: "",
+        venueStreet: "",
+        venueCity: "",
+        venueState: "",
+        venueZip: "",
+        date: ""
       },
       displayLender: false,
       selectedRequest: {},
@@ -78,7 +80,9 @@ export default {
       lenderList: [],
       myRequests: [],
       showMatches: false,
-      displayForm: false
+      displayForm: false,
+      formSubmission: false,
+      deleteId: ""
     };
   },
   methods: {
@@ -105,6 +109,31 @@ export default {
     switchSignup() {
       this.signup = !this.signup;
     },
+    deleteRequest(id) {
+      this.deleteId = id;
+      console.log(this.API.REQUESTS + this.deleteId);
+      const postOptions = {
+        method: "DELETE"
+      };
+      fetch(this.API.REQUESTS + this.deleteId, postOptions)
+        .then(res => res.json())
+        .then(resJSON => {
+          if (resJSON.error) {
+            alert(
+              "Something went wrong. Please make sure the form is complete and try again."
+            );
+          } else {
+            alert("Request Deleted");
+            this.formSubmission = true;
+            this.myRequests.filter(match => {
+              if (match.id === id) {
+                const index = this.myRequests.indexOf(match.id);
+                this.myRequests.splice(index, 1);
+              }
+            });
+          }
+        });
+    },
     enterInfo(id, borrower) {
       this.displayLender = !this.displayLender;
       this.requestId = id;
@@ -112,6 +141,45 @@ export default {
     },
     toggleDisplay() {
       this.displayLogin = !this.displayLogin;
+    },
+    resetForm() {
+      this.borrowerInfo = {
+        bandName: "",
+        borrowerEmail: "",
+        borrowerZip: "",
+        borrowerCity: "",
+        borrowerName: "",
+        borrowerRequest: "",
+        borrowerPhone: "",
+        borrowerState: "",
+        borrowerStreet: "",
+        venueName: "",
+        venueStreet: "",
+        venueCity: "",
+        venueState: "",
+        venueZip: "",
+        date: ""
+      };
+      this.formSubmission = false;
+    },
+    submitRequest() {
+      const postOptions = {
+        method: "POST",
+        body: JSON.stringify(this.borrowerInfo),
+        headers: { "Content-Type": "application/json" }
+      };
+      fetch(this.API.REQUESTS, postOptions)
+        .then(res => res.json())
+        .then(resJSON => {
+          if (resJSON.error) {
+            alert(
+              "Something went wrong. Please make sure the form is complete and try again."
+            );
+          } else {
+            alert("Thank you for your submission!");
+            this.formSubmission = true;
+          }
+        });
     }
   },
   async mounted() {

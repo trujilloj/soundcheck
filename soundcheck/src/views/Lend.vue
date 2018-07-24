@@ -4,11 +4,14 @@
         <Login v-show="displayLogin" :switchSignup="switchSignup" :signup="signup" :submitLogin="submitLogin" :loginData="loginData" :displayLogin="displayLogin" :toggleDisplay="toggleDisplay"/>
         <div class="home" v-show="!displayLogin">
           <div class="box">
-            <button class="btn btn-success" @click.prevent="showMatches = !showMatches">View Upcoming Matches</button>
-          <section id="myMatches" v-show="showMatches">
+            <button v-show="showMatches" class="btn btn-success" @click.prevent="showMatches = !showMatches">View Upcoming Matches</button>
+            <button v-show="!showMatches" class="btn btn-success" @click.prevent="showMatches = !showMatches">Hide Upcoming Matches</button>
+
+          <section id="myMatches" v-show="!showMatches">
+            <p v-show="showMatches">{{matchesMessage}}</p>
             <Matches class="card text-white bg-dark mb-3 cardSpacing" v-for="match in myRequests" :key="match.id" :match="match"/>
           </section>
-          <Search :requestList="requestList" :filterRequests="filterRequests" :searchProperties="searchProperties"/>
+          <Search v-show="!displayLender" :requestList="requestList" :filterRequests="filterRequests" :searchProperties="searchProperties"/>
           <section v-show="!displayLender" class="requestList">
             <RequestCard v-for="borrower in searchProperties.searchResults" :key="borrower.id" class="card text-white bg-dark mb-3 cardSpacing" style="max-width: 20rem;" :borrower="borrower" :requestId="requestId" :fillRequest="fillRequest" :lenderInfo="lenderInfo" :enterInfo="enterInfo"/>
           </section>
@@ -40,6 +43,7 @@ export default {
   },
   data() {
     return {
+      matchesMessage: "No Matches Found",
       loginData: {
         userName: "",
         password: ""
@@ -87,7 +91,8 @@ export default {
       return this.lenderList.filter(match => {
         if (match.lenderEmail.toLowerCase() ==
         this.loginData.userName.toLowerCase()) {
-          this.myRequests.push(match)
+          this.myRequests.push(match);
+          this.matchesMessage = "";
         }
       })
     },
@@ -145,19 +150,6 @@ export default {
     fillRequest() {
       this.lenderInfo.request._id = this.requestId;
       this.postFill();
-      // this.lenderInfo = {
-      //   lenderEmail: "",
-      //   lenderZip: "",
-      //   lenderCity: "",
-      //   lenderName: "",
-      //   lenderGear: "",
-      //   lenderPhone: "",
-      //   lenderState: "",
-      //   lenderStreet: "",
-      //   request: {
-      //     _id: ""
-      //   }
-      // };
       this.requestId = "";
       this.selectedRequest = {};
     },
@@ -197,11 +189,12 @@ export default {
 }
 .cardSpacing {
   margin: 0.5%;
+  max-width: 300px;
 }
 #myMatches {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   width: 100%;
 }
 /* .requestCard {

@@ -41,7 +41,7 @@ body {
   margin: 0px;
 }
 .box {
-  width: 60%;
+  width: 70%;
   min-height: 800px;
   background-color: rgb(255, 255, 255);
   background-color: rgba(255, 255, 255, 0.25);
