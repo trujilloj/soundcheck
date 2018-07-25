@@ -103,7 +103,6 @@ methods: {
   },
   submitLogin() {
     if (this.loginData.userName && this.loginData.password) {
-      console.log(this.loginData.userName);
       this.toggleDisplay();
       this.findMatches();
     } else {
@@ -115,7 +114,6 @@ methods: {
   },
   deleteRequest(id) {
     this.deleteId = id;
-    console.log(this.API.REQUESTS + this.deleteId);
     const postOptions = {
       method: "DELETE"
     };

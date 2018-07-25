@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Lend from './views/Lend.vue'
 import Borrow from './views/Borrow.vue'
+import Account from './views/Account.vue'
 
 Vue.use(Router)
 
@@ -27,6 +28,10 @@ export default new Router({
             path: '/borrow',
             name: 'borrow',
             component: Borrow
-        }
-    ]
+        },
+        {
+            path: '/account',
+            name: 'account',
+            component: Account
+        }]
 })

@@ -2,6 +2,8 @@
 <div class="card text-white bg-dark mb-3">
     <h4  class="card-header">{{match.request.borrowerName}}</h4>
         <div class="card-body">
+            <p>Phone: {{match.request.borrowerPhone}}
+            <br />Email: {{match.request.borrowerEmail}}</p>
             <h4>What was requested:</h4>
             <p>{{match.request.borrowerRequest}}</p>
             <h4>What you're bringing:</h4>

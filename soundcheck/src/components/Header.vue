@@ -15,6 +15,8 @@
       <router-link to="/Lend">Lend</router-link>
       <div>|</div>
       <router-link to="/About">About</router-link>
+      <!-- <div>|</div>
+      <router-link to="/Account">My Account</router-link>       -->
     </div>
   </div>
 </nav>

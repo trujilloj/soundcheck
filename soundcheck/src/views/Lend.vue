@@ -101,7 +101,6 @@ methods: {
   },
   submitLogin() {
     if (this.loginData.userName && this.loginData.password) {
-      console.log(this.loginData.userName);
       this.toggleDisplay();
       this.findMatches();
     } else {
@@ -164,7 +163,17 @@ methods: {
     };
     fetch(this.API.LENDERS, postOptions)
       .then(res => res.json())
-      .then(resJSON => console.log(resJSON));
+      .then(resJSON => {
+        if (resJSON.error) {
+          alert(
+            "Something went wrong. Please make sure the form is complete and try again."
+          );
+        } else {
+          alert("Thank you for your submission!");
+          this.formSubmission = true;
+        }
+      });
+      this.displayLender = !this.displayLender;
   }
 },
 async mounted() {

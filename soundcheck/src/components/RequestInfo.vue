@@ -20,17 +20,13 @@ export default {
         return {
             readableDate: "",
             readableTime: "",
-            unformattedDate: "",
-            unformattedTime: ""
         }
     },
   props: ["borrower"],
 mounted(){
-    this.unformattedDate = this.borrower.date;
-    var date = new Date(this.unformattedDate);
+    var date = new Date ("2018-08-04T18:00:00.000Z");
     this.readableDate = date.toDateString();
-    this.unformattedTime = this.borrower.date;
-    var time = new Date(this.unformattedTime);
+    var time = new Date("2018-08-04T18:00:00.000Z");
     this.readableTime = time.toLocaleTimeString();
 }
 }
