@@ -10,12 +10,12 @@
       <h4 v-show="!signup">Don't have an account?</h4>
       <button v-show="!signup" @click.prevent="switchSignup" class="btn btn-success buttons">Sign Up Now</button>
       <h1 v-show="signup">Create a Username and Password</h1>
-      <div class="eula" v-show="signup">End-User License Agreement for Soundcheck
+      <div class="eula" v-show="signup">Terms of Use Agreement for Soundcheck
 
-        This End-User License Agreement (EULA) is a legal agreement between you (either an individual or a single entity) and the mentioned author (EdrawSoft.COM) of this Software for the software product identified above, which includes computer software and may include associated media, printed materials, and “online” or electronic documentation (“SOFTWARE PRODUCT”).
+        This is a legal agreement between you (either an individual or a single entity) and the mentioned author of this Software for the software product identified above, which may include associated media, printed materials, and “online” or electronic documentation (“SOFTWARE PRODUCT”).
 
-        By installing, copying, or otherwise using the SOFTWARE PRODUCT, you agree to be bounded by the terms of this EULA.
-        If you do not agree to the terms of this EULA, do not install or use the SOFTWARE PRODUCT.
+        By signing up and using the SOFTWARE PRODUCT, you agree to be bounded by these terms.
+        If you do not agree to these terms, do not use the SOFTWARE PRODUCT.
       </div>
       <form  v-show="signup" class="signupForm" v-on:submit.prevent="switchSignup">
         <input v-model="loginData.userName" class="form-control mb-2 mr-sm-2" type="text" name="userName"    placeholder="Username">
