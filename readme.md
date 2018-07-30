@@ -1,5 +1,7 @@
 # soundcheck
 
+## ![](https://i.imgur.com/ooyql8s.png)
+
 ## [Live Site](https://soundcheckmvp.firebaseapp.com/#/)
 
 ## Project Description: Think "Elevator Pitch". Succinctly, but completely describe what you'll be building
