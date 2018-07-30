@@ -1,3 +1,7 @@
+# soundcheck
+
+## [Live Site](https://soundcheckmvp.firebaseapp.com/#/)
+
 ## Project Description: Think "Elevator Pitch". Succinctly, but completely describe what you'll be building
 
 Touring musicians have historically gathered into a questionably safe/reliable van to travel across the country with their music gear (which is usually more valuable than the van) in order to play their music in front of an audience. The risk of traveling with that much gear and the burden of having to haul it with you across thousands of miles is large. This app would provide a network for musicians to help each other out, with benefit to themselves when they hit the road.
