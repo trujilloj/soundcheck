@@ -29,3 +29,11 @@ At its core the main function is a way for touring artists to post requests for 
 ## List the technologies you plan to use. This should be a complete list, including APIs. Be prepared to defend the items on this list. This means you should research the technologies/APIs, and know why you're planning to use each.
 
 Vue, MongoDB, Strapi, Stripe, Oauth, Leaflet/Google Maps to proximity search
+
+## Installation:
+
+> -Clone this repo.
+
+> -run `npm install`
+
+> -run 'npm run serve' to run locally
